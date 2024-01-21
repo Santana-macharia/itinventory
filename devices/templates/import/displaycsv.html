@@ -1,0 +1,257 @@
+<!-- view_uploaded_csv.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <title>All devices</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+        }
+
+        .pagination a:hover {
+            background-color: #ddd;
+        }
+
+        .pagination .active {
+            background-color: #4CAF50;
+            color: white;
+        }
+       
+        form {
+            text-align: center;
+        }
+        #print_button, #export_pdf_button, #export_excel_button {
+            background: none;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-left: 5px; /* Add margin to separate the search and action buttons */
+        }
+        header {
+            background-color: #3498db; /* Blue color */
+            color: white;
+            padding: 0.1em;
+            text-align: left;
+            position: fixed;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            
+        }
+
+        body {
+        margin-top: 100px; /* Adjust margin-top to match the header height */
+        margin-bottom: 60px;
+    }
+
+        header img {
+            max-width: 80px; /* Adjust the max-width based on your needs */
+            height: auto;
+            margin-right: 20px; /* Adjust margin based on your needs */
+        }
+        
+        
+
+            header img {
+                margin-right: 0;
+            }
+
+            header a {
+            text-decoration: none !important; /* Remove the underline */
+            color: white; /* Set the text color to white */
+        }
+
+
+            header h3 {
+            margin: 0;
+            cursor: pointer;
+            color: white; /* Set the text color to white */
+            
+        } 
+
+            footer {
+            background-color: #2ecc71; /* Green color */
+            color: white;
+            padding: 0em;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media only screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            header img {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            form {
+                text-align: left;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{% static 'images/logo.png' %}" alt="Logo"><!-- Add the path to your logo image -->
+        <a href="{% url 'admin:index' %}">
+            <h3>MOHI IT Inventory</h3>
+        </a>
+        <!-- <a href="{% url 'admin:index' %}" class="admin-button">Go to Admin</a> -->
+    </header>
+
+<!-- Add a table or other HTML structure to display CSV content -->
+<!-- display_csv.html -->
+<!-- <h2>All devices</h2> -->
+<!-- Add a search form -->
+<form method="get" action="{% url 'display_csv' %}">
+    <label for="search_query">Search:</label>
+    <input type="text" id="search_query" name="search" value="{{ report_data.search_query }}" />
+    <button type="submit">Search</button>
+</form>
+
+<!-- print button -->
+
+
+
+
+  <!-- Display report data -->
+  <div>
+    <p>Total Records: {{ report_data.total_records }}</p>
+    <!-- Add more report data display as needed -->
+
+    <button id="print_button" onclick="window.print()">
+        <i class="fas fa-print"></i> Print
+    </button>
+
+    <!-- Export to PDF button -->
+    <a href="{% url 'export_to_pdf' %}?search={{ report_data.search_query }}" id="export_pdf_button">
+        <i class="far fa-file-pdf"></i> Export to PDF
+    </a>
+
+    <!-- Export to Excel button -->
+    <a href="{% url 'export_to_excel' %}?search={{ report_data.search_query }}" id="export_excel_button">
+        <i class="far fa-file-excel"></i> Export to Excel
+    </a>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Centre</th>
+            <th>Department</th>
+            <th>Hardware</th>
+            <th>System Model</th>
+            <!-- <th>Device Name</th> -->
+            <th>Processor</th>
+            <th>Ram (GB)</th>
+            <th>HDD (GB)</th>
+            <th>Serial Number</th>
+            <!-- <th>Assigned By</th> -->
+            <th>Assignee First Name</th>
+            <th>Assignee Last Name</th>
+            <th>Assignee Email Address</th>
+            <th>Device Condition</th>
+            <th>Status</th>
+            <th>Date</th>
+            <!-- Add more headers as needed -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in data %}
+            <tr>
+                
+                <td>{{ item.centre }}</td>
+                <td>{{ item.department }}</td>
+                <td>{{ item.hardware  }}</td>
+                <td>{{ item.system_model }}</td>
+                <!-- <td>{{ item.device_name }}</td> -->
+                <td>{{ item.processor }}</td>
+                <td>{{ item.ram_gb }}</td>
+                <td>{{ item.hdd_gb }}</td>
+                <td>{{ item.serial_number }}</td>
+                <!-- <td>{{ item.assigned_by }}</td> -->
+                <td>{{ item.assignee_first_name }}</td>
+                <td>{{ item.assignee_last_name }}</td>
+                <td>{{ item.assignee_email_address }}</td>
+                <td>{{ item.device_condition }}</td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.date }}</td>
+                <!-- Add more data cells as needed -->
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if data.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ data.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ data.number }} of {{ data.paginator.num_pages }}.
+        </span>
+
+        {% if data.has_next %}
+            <a href="?page={{ data.next_page_number }}">next</a>
+            <a href="?page={{ data.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+<form method="get" action="{% url 'display_csv' %}">
+    <label for="page_number">Go to Page:</label>
+    <input type="text" id="page_number" name="page" />
+    <button type="submit">Go</button>
+</form>
+<p></p>
+
+<footer>
+    <p>&copy; 2024 MOHI IT Inventory</p>
+</footer>
+
+</body>
+</html>
