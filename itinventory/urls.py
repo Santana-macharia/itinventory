@@ -25,7 +25,7 @@ urlpatterns = [
     path('', include('ictinventory.urls')),
     path('upload/', include('devices.urls')),
     path('display/', include('devices.urls')),
-   path('admin/displaycsv/', display_csv, name='displaycsv_template'),
+    path('displaycsv', display_csv, name='import_displaycsv'),
    
       
 ]

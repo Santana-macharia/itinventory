@@ -108,7 +108,7 @@ def display_csv(request):
 
 def displaycsv(request):
     # Your view logic for displaycsv.html goes here
-    return render(request, 'devices/report/displaycsv.html')
+    return render(request, 'import/displaycsv.html')
 
 # views.py 
 def export_to_pdf(request):

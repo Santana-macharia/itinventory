@@ -1,7 +1,7 @@
 # urls.py
 from django.urls import path
 from . import views
-from .views import displaycsv
+from .views import display_csv
 
 
 
@@ -10,7 +10,8 @@ urlpatterns = [
     path('displaycsv/', views.display_csv, name='display_csv'),
     path('exportpdf/', views.export_to_pdf, name='export_to_pdf'),
     path('exportexcel/', views.export_to_excel, name='export_to_excel'),
-    path('admin/report/displaycsv/', displaycsv, name='devices_report_displaycsv'),
+    path('displayreport/', display_csv, name='import_displaycsv'), 
+    
 ]
     
     

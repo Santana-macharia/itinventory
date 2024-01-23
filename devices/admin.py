@@ -32,9 +32,13 @@ class ReportAdmin(admin.ModelAdmin):
     
 
 
+    # def changelist_view(self, request, extra_context=None):
+    #     redirect_url = reverse('displaycsv_template')
+    #     return redirect(redirect_url)
+    
     def changelist_view(self, request, extra_context=None):
-        redirect_url = reverse('displaycsv_template')
-        return redirect(redirect_url)
+        displaycsv_url = reverse('import_displaycsv')
+        return redirect(displaycsv_url)
 
 admin.site.register(Report, ReportAdmin)
 
