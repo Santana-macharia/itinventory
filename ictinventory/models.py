@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from multiselectfield import MultiSelectField
 
 # import datetime
 
@@ -104,7 +105,8 @@ class PPM(models.Model):
         ('Returned', 'Returned'),
         
     )
-    activities = models.CharField(max_length=500, choices=ACTIVITIES)
+    # activities = models.CharField(max_length=500, choices=ACTIVITIES)
+    activities = MultiSelectField(choices=ACTIVITIES, max_length=1000)
     issues = models.CharField(max_length=1000)
     recommendations = models.CharField(max_length=1000)
     date = models.DateTimeField(default=timezone.now)

@@ -13,8 +13,8 @@ from .models import Import, Report
 
 class ImportAdmin(admin.ModelAdmin):
     # list_display = ('get_display_field', 'centre', 'department', 'hardware', 'system_model', 'processor', 'ram_gb', 'hdd_gb', 'serial_number', 'assignee_first_name', 'assignee_last_name', 'assignee_email_address', 'device_condition', 'status', 'date')
-    list_display = ('centre', 'department', 'hardware', 'system_model', 'processor', 'ram_gb', 'hdd_gb', 'serial_number', 'assignee_first_name', 'assignee_last_name', 'assignee_email_address', 'device_condition', 'status', 'date')
-    search_fields = ['centre', 'department', 'hardware', 'system_model', 'processor', 'ram_gb', 'hdd_gb', 'serial_number', 'assignee_first_name', 'assignee_last_name', 'assignee_email_address', 'device_condition', 'status', 'date']
+    list_display = ('department', 'hardware', 'system_model', 'processor', 'ram_gb', 'hdd_gb', 'serial_number', 'assignee_first_name', 'assignee_last_name', 'assignee_email_address', 'device_condition', 'status', 'date')
+    search_fields = ['department', 'hardware', 'system_model', 'processor', 'ram_gb', 'hdd_gb', 'serial_number', 'assignee_first_name', 'assignee_last_name', 'assignee_email_address', 'device_condition', 'status', 'date']
 
     def get_display_field(self, obj):
         return obj.display_field

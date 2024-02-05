@@ -75,7 +75,7 @@
         }
 
         body {
-        margin-top: 100px; /* Adjust margin-top to match the header height */
+        margin-top: 120px; /* Adjust margin-top to match the header height */
         margin-bottom: 60px;
     }
 
@@ -179,8 +179,8 @@
 <table>
     <thead>
         <tr>
-            <th>Centre</th>
-            <th>Department</th>
+            <!-- <th>Centre</th> -->
+            <th>Centre/Department</th>
             <th>Hardware</th>
             <th>System Model</th>
             <!-- <th>Device Name</th> -->
@@ -202,7 +202,7 @@
         {% for item in data %}
             <tr>
                 
-                <td>{{ item.centre }}</td>
+                <!-- <td>{{ item.centre }}</td> -->
                 <td>{{ item.department }}</td>
                 <td>{{ item.hardware  }}</td>
                 <td>{{ item.system_model }}</td>
